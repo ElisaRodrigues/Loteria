@@ -1,10 +1,7 @@
 <?php
-
-//O QUE FALTA: *Não gerar apostas duplicadas ou com número duplicados*, respeitar o mínimo e o máximo de cada jogo,
-//NÃO TENHO CERTEZA: Solicitar do usuário quantas apostas ele quer gerar,Solicitar do usuário quantas dezenas ele quer apostar
+//O QUE FALTA: *Não gerar apostas duplicadas ou com número duplicados*
 
 menu();
-
 function menu(){
 
     echo "solicite um jogo. (1) MEGA (2) QUINA (3) LOTOMANIA (4) LOTOFÁCIL (5) SAIR";
@@ -13,33 +10,27 @@ function menu(){
 
     switch ($jogo) {
         case 1:
-            echo "as regras são: \n";
             echo jogar(1)."\n";
             echo menu()."\n";
             break;
-
         case 2:
             $jogo = "quina \n";
-            //echo jogar()."\n";
+            echo jogar(2)."\n";
             echo menu()."\n";
             break;
-
         case 3:
             $jogo = "lotomania \n";
-            // echo jogar()."\n";
+            echo jogar(3)."\n";
             echo menu()."\n";
             break;
-
         case 4:
             $jogo = "lotofácil \n";
-            //echo jogar()."\n";
+            echo jogar(4)."\n";
             echo menu()."\n";
             break;
-
         case 5:
             exit();
             break;
-
         default:
             echo "opcao inválida \n";
             menu();
@@ -49,9 +40,6 @@ function menu(){
 
 
 //função jogar
-
-
-
 function jogar($jogo){
     if ($jogo == 1){
 
@@ -127,21 +115,22 @@ function jogar($jogo){
         $valorTotal = $valor * $numeroApostas;
         echo "escolheu $dezenas dezenas & apostou R$ ". number_format($valorTotal, "2", ",", ".");
 
-    }elseif ( $jogo == 2){
-        // global  $possibilidades = 80;                                         //QUINA
-        echo "ESCOLHA QUANTAS DEZENAS: \n 
+   }elseif ( $jogo == 2){
+
+        echo "ESCOLHA QUANTAS DEZENAS: \n
         Digite (1) 5 dezenas & apostar 1.50\n
-        Digite (2) 6 dezenas & apostar 9.00\n 
-        Digite (3) 7 dezenas & apostar 31.50\n 
-        Digite (4) 8 dezenas & apostar 84.00\n 
-        Digite (5) 9 dezenas & apostar 189.00\n 
-        Digite (6) 10 dezenas & apostar 378.00\n 
-        Digite (7) 11 dezenas & apostar 693.00\n 
-        Digite (8) 12 dezenas & apostar 1188.00\n 
-        Digite (9) 13 dezenas & apostar 1930.50\n 
-        Digite (10) 14 dezenas & apostar 3003.00\n 
+        Digite (2) 6 dezenas & apostar 9.00\n
+        Digite (3) 7 dezenas & apostar 31.50\n
+        Digite (4) 8 dezenas & apostar 84.00\n
+        Digite (5) 9 dezenas & apostar 189.00\n
+        Digite (6) 10 dezenas & apostar 378.00\n
+        Digite (7) 11 dezenas & apostar 693.00\n
+        Digite (8) 12 dezenas & apostar 1188.00\n
+        Digite (9) 13 dezenas & apostar 1930.50\n
+        Digite (10) 14 dezenas & apostar 3003.00\n
         Digite (11) 15 dezenas & apostar 4504.50\n"; //Solicita do usuário quantas dezenas ele quer apostar & quantas apostas ele quer gerar
-        echo fgets(STDIN);
+        $dezenas = trim(fgets(STDIN));
+
         switch ($dezenas){
             case 1:
                 $dezenas = 5;
@@ -187,57 +176,84 @@ function jogar($jogo){
                 $dezenas = 15;
                 $valor = 4504.50;
                 break;
+            default :
+                echo "voce escolhe uma opccao invalida";
+                jogar(2);
         }
-        echo "escolheu $dezenas dezenas & apostou R$ $valor";
-    }elseif ($jogo == 3){
-        // global  $possibilidades = 50;                                    //LOTOMANIA
-        $valor = 1.50;
-        echo "O PREÇO DA APOSTA É ÚNICO E EQUIVALE À $valor."; //Solicita do usuário quantas apostas ele quer gerar
-        echo "ESCOLHA QUANTAS DEZENAS: \n 
+
+        echo "Digite o numeo de apostas que deseja: ";
+        $numeroApostas = trim(fgets(STDIN));
+
+        for ($i=0; $i < $numeroApostas; $i++){
+            print_r(sortear(80, $dezenas));
+
+        }
+
+        $valorTotal = $valor * $numeroApostas;
+
+        echo "escolheu $dezenas dezenas & apostou R$ ". number_format($valorTotal, "2", ",", ".");
+
+        } elseif ($jogo == 3){
+
+        $valor = 1.50 ."\n";
+
+        echo "\n O PREÇO DA APOSTA É ÚNICO E EQUIVALE À $valor \n"; //Solicita do usuário quantas apostas ele quer gerar
+
+        echo "ESCOLHA QUANTAS DEZENAS: \n
         Digite (1) 15 dezenas\n
-        Digite (2) 16 dezenas\n 
-        Digite (3) 17 dezenas\n 
-        Digite (4) 18 dezenas\n 
-        Digite (5) 19 dezenas\n 
+        Digite (2) 16 dezenas\n
+        Digite (3) 17 dezenas\n
+        Digite (4) 18 dezenas\n
+        Digite (5) 19 dezenas\n
         Digite (6) 20 dezenas\n ";    //Solicita do usuário quantas dezenas ele quer apostar
-        echo fgets(STDIN);
+
+        $dezenas = trim(fgets(STDIN));
+
         switch ($dezenas){
             case 1:
                 $dezenas = 15;
-                $valor = 1.50;
                 break;
             case 2:
                 $dezenas = 16;
-                $valor = 1.50;
                 break;
             case 3:
                 $dezenas = 17;
-                $valor = 1.50;
                 break;
             case 4:
                 $dezenas = 18;
-                $valor = 1.50;
                 break;
             case 5:
                 $dezenas = 19;
-                $valor = 1.50;
                 break;
             case 6:
                 $dezenas = 20;
-                $valor = 1.50;
                 break;
         }
-        echo "escolheu $dezenas dezenas & apostou R$ $valor";
+
+        echo "Digite o numeo de apostas que deseja: ";
+            $numeroApostas = trim(fgets(STDIN));
+
+        for ($i=0; $i < $numeroApostas; $i++){
+              print_r(sortear(50, $dezenas));
+        }
+
+        $valorTotal = $valor * $numeroApostas;
+
+        echo "escolheu $dezenas dezenas & apostou R$ ". number_format($valorTotal, "2", ",", ".");
+
+        jogar(3);
+
+
     }else {
-        // global  $possibilidades = 25;                                //LOTOFÁCIL
-        $valor = 1.50;
-        echo "O PREÇO DA APOSTA É ÚNICO E EQUIVALE À $valor."; //Solicita do usuário quantas apostas ele quer gerar
-        echo "ESCOLHA QUANTAS DEZENAS: \n 
+
+        echo "ESCOLHA QUANTAS DEZENAS: \n
         Digite (1) 15 dezenas & apostar R$ 2.00\n
-        Digite (2) 16 dezenas & apostar R$ 32.00\n 
-        Digite (3) 17 dezenas & apostar R$ 272.00\n 
+        Digite (2) 16 dezenas & apostar R$ 32.00\n
+        Digite (3) 17 dezenas & apostar R$ 272.00\n
         Digite (4) 18 dezenas & apostar R$ 1632.00\n"; //Solicita do usuário quantas dezenas ele quer apostar
-        echo fgets(STDIN);
+
+        $dezenas = trim(fgets(STDIN));
+
         switch ($dezenas){
             case 1:
                 $dezenas = 15;
@@ -256,7 +272,18 @@ function jogar($jogo){
                 $valor = 1632.00;
                 break;
         }
-        echo "escolheu $dezenas dezenas & apostou R$ $valor";
+        echo "Digite o numeo de apostas que deseja: ";
+        $numeroApostas = trim(fgets(STDIN));
+
+        for ($i=0; $i < $numeroApostas; $i++){
+            print_r(sortear(25, $dezenas));
+        }
+
+        $valorTotal = $valor * $numeroApostas;
+
+        echo "escolheu $dezenas dezenas & apostou R$ ". number_format($valorTotal, "2", ",", ".");
+
+        jogar(4);
     }
 
 }
