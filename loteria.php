@@ -38,8 +38,6 @@ function menu(){
     return $jogo;
 }
 
-
-//função jogar
 function jogar($jogo){
     if ($jogo == 1){
 
@@ -186,7 +184,6 @@ function jogar($jogo){
 
         for ($i=0; $i < $numeroApostas; $i++){
             print_r(sortear(80, $dezenas));
-
         }
 
         $valorTotal = $valor * $numeroApostas;
@@ -276,7 +273,7 @@ function jogar($jogo){
         $numeroApostas = trim(fgets(STDIN));
 
         for ($i=0; $i < $numeroApostas; $i++){
-            print_r(sortear(25, $dezenas));
+            echo (sortear(25, $dezenas));
         }
 
         $valorTotal = $valor * $numeroApostas;
@@ -287,9 +284,6 @@ function jogar($jogo){
     }
 
 }
-
-//função sortear
-
 function sortear($possibilidades, $dezenas){
     $numSorteados = [];
     for ($i=1; $i<=$dezenas; $i++){
